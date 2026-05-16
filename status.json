@@ -1,0 +1,95 @@
+{
+  "updatedAt": "2026-05-17T09:00:00+09:00",
+  "deck": {
+    "title": "상태판",
+    "mode": "iPad mini 2",
+    "refreshSeconds": 30
+  },
+  "helm": {
+    "name": "Helm 프로젝트",
+    "state": "watch",
+    "phase": "검토 중",
+    "progress": 64,
+    "summary": "완성 조건을 확인하며 상태판 연동 지점을 정리 중",
+    "reviewItems": 7,
+    "blockers": 1,
+    "nextCheckpoint": "완료 기준 확정",
+    "services": [
+      {
+        "name": "검토 상태",
+        "detail": "핵심 요구사항과 완료 기준 확인",
+        "state": "watch",
+        "label": "진행"
+      },
+      {
+        "name": "실행 상태",
+        "detail": "상태 API 연결 대기",
+        "state": "warn",
+        "label": "대기"
+      },
+      {
+        "name": "기록",
+        "detail": "결정 사항은 Obsidian에 저장 예정",
+        "state": "ok",
+        "label": "준비"
+      }
+    ]
+  },
+  "ogwang": {
+    "name": "오광이",
+    "state": "ok",
+    "label": "정상",
+    "presence": "대기 중",
+    "mood": "차분",
+    "battery": 86,
+    "signal": "좋음",
+    "lastSeen": "2026-05-17T09:00:00+09:00",
+    "metrics": [
+      {
+        "label": "배터리",
+        "value": "86%"
+      },
+      {
+        "label": "신호",
+        "value": "좋음"
+      },
+      {
+        "label": "모드",
+        "value": "상시 노출"
+      },
+      {
+        "label": "응답",
+        "value": "준비"
+      }
+    ]
+  },
+  "timeline": [
+    {
+      "title": "검토",
+      "detail": "완료 조건과 상태 소스 정리",
+      "state": "watch"
+    },
+    {
+      "title": "연동",
+      "detail": "Helm/오광이 상태 JSON 또는 API 연결",
+      "state": "warn"
+    },
+    {
+      "title": "거치",
+      "detail": "iPad mini 2 홈 화면 고정",
+      "state": "ok"
+    }
+  ],
+  "events": [
+    {
+      "title": "HelmDeck 초안",
+      "detail": "정적 대시보드 준비",
+      "state": "ok"
+    },
+    {
+      "title": "데이터 소스",
+      "detail": "status.json 사용 중",
+      "state": "watch"
+    }
+  ]
+}

@@ -1,0 +1,153 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="theme-color" content="#121212">
+    <title>HelmDeck</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="app.js" defer></script>
+  </head>
+  <body>
+    <div class="app-shell">
+      <header class="topbar" aria-label="대시보드 헤더">
+        <div class="brand-lockup">
+          <div class="brand-mark" aria-hidden="true">
+            <svg viewBox="0 0 48 48" focusable="false">
+              <circle cx="24" cy="24" r="17"></circle>
+              <path d="M24 7v34M7 24h34M12 12l24 24M36 12 12 36"></path>
+              <circle cx="24" cy="24" r="5"></circle>
+            </svg>
+          </div>
+          <div>
+            <p class="eyebrow">HELMDECK</p>
+            <h1 id="deckTitle">상태판</h1>
+          </div>
+        </div>
+
+        <div class="topbar-status">
+          <div class="clock-block">
+            <span id="clockTime" class="clock-time">--:--</span>
+            <span id="clockDate" class="clock-date">----</span>
+          </div>
+          <div id="sourcePill" class="source-pill" data-state="watch">
+            <span class="state-dot" aria-hidden="true"></span>
+            <span id="sourceLabel">연결 중</span>
+          </div>
+          <button id="refreshButton" class="icon-button" type="button" aria-label="상태 새로고침" title="상태 새로고침">
+            <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+              <path d="M20 12a8 8 0 1 1-2.35-5.65"></path>
+              <path d="M20 4v6h-6"></path>
+            </svg>
+          </button>
+        </div>
+      </header>
+
+      <main class="dashboard-grid" aria-label="HelmDeck 대시보드">
+        <section id="ogwangPanel" class="panel ogwang-panel" data-state="ok" aria-labelledby="ogwangTitle">
+          <div class="panel-heading">
+            <div>
+              <p class="eyebrow">ALWAYS ON</p>
+              <h2 id="ogwangTitle">오광이</h2>
+            </div>
+            <span id="ogwangState" class="status-chip" data-state="ok">정상</span>
+          </div>
+
+          <div class="ogwang-hero">
+            <div class="status-ring" aria-hidden="true">
+              <span id="ogwangInitial">오</span>
+            </div>
+            <div class="ogwang-copy">
+              <p id="ogwangPresence" class="large-value">대기 중</p>
+              <p id="ogwangMood" class="muted">차분</p>
+            </div>
+          </div>
+
+          <div class="metric-grid" id="ogwangMetrics" aria-label="오광이 상태 지표"></div>
+
+          <div class="signal-board" aria-label="오광이 신호 상태">
+            <div class="signal-bars" aria-hidden="true">
+              <span></span>
+              <span></span>
+              <span></span>
+              <span></span>
+              <span></span>
+            </div>
+            <div>
+              <p id="ogwangSignal" class="signal-title">신호 좋음</p>
+              <p id="ogwangLastSeen" class="muted">방금 전</p>
+            </div>
+          </div>
+        </section>
+
+        <section class="panel helm-panel" aria-labelledby="helmTitle">
+          <div class="panel-heading">
+            <div>
+              <p class="eyebrow">HELM PROJECT</p>
+              <h2 id="helmTitle">Helm 프로젝트</h2>
+            </div>
+            <span id="helmPhase" class="status-chip" data-state="watch">검토 중</span>
+          </div>
+
+          <p id="helmSummary" class="summary-line">완성 조건을 확인하며 상태판 연동 지점을 정리 중</p>
+
+          <div class="progress-card">
+            <div class="progress-head">
+              <span>완성도</span>
+              <strong id="helmProgressText">64%</strong>
+            </div>
+            <div class="progress-track" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="64" aria-label="Helm 프로젝트 완성도">
+              <div id="helmProgressBar" class="progress-bar"></div>
+            </div>
+          </div>
+
+          <div class="stat-grid" aria-label="Helm 핵심 상태">
+            <article class="stat-tile">
+              <span class="stat-label">검토 항목</span>
+              <strong id="reviewItems">7</strong>
+            </article>
+            <article class="stat-tile">
+              <span class="stat-label">블로커</span>
+              <strong id="blockerCount">1</strong>
+            </article>
+            <article class="stat-tile">
+              <span class="stat-label">다음 기준</span>
+              <strong id="nextCheckpoint">완료 기준 확정</strong>
+            </article>
+          </div>
+
+          <div class="section-row">
+            <h3>상태 소스</h3>
+            <span id="lastUpdated" class="muted">업데이트 대기</span>
+          </div>
+          <div id="serviceList" class="service-list" aria-label="Helm 상태 소스 목록"></div>
+        </section>
+
+        <aside class="side-stack" aria-label="상태 기록">
+          <section class="panel compact-panel" aria-labelledby="timelineTitle">
+            <div class="section-row">
+              <h2 id="timelineTitle">체크포인트</h2>
+              <span id="deckMode" class="mini-pill">iPad mini 2</span>
+            </div>
+            <div id="timelineList" class="timeline-list"></div>
+          </section>
+
+          <section class="panel compact-panel" aria-labelledby="eventsTitle">
+            <div class="section-row">
+              <h2 id="eventsTitle">로그</h2>
+              <span id="refreshCadence" class="mini-pill">30초</span>
+            </div>
+            <div id="eventList" class="event-list"></div>
+          </section>
+        </aside>
+      </main>
+
+      <footer class="heartbeat-strip" aria-label="대시보드 하트비트">
+        <span class="state-dot" aria-hidden="true"></span>
+        <span id="heartbeatText">HelmDeck 준비 중</span>
+      </footer>
+    </div>
+  </body>
+</html>
