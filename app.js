@@ -60,6 +60,7 @@
 
   var currentData = fallbackStatus;
   var refreshTimer = null;
+  var isStatusLoading = false;
 
   function byId(id) {
     return document.getElementById(id);
@@ -170,6 +171,24 @@
       done(new Error("network error"));
     };
     xhr.send();
+  }
+
+  function setRefreshLoading(isLoading) {
+    var refreshButton = byId("refreshButton");
+    if (!refreshButton) {
+      return;
+    }
+
+    refreshButton.disabled = isLoading;
+    refreshButton.setAttribute("aria-busy", isLoading ? "true" : "false");
+    refreshButton.setAttribute("aria-label", isLoading ? "상태 불러오는 중" : "상태 새로고침");
+    refreshButton.setAttribute("title", isLoading ? "상태 불러오는 중" : "상태 새로고침");
+
+    if (isLoading) {
+      refreshButton.classList.add("is-loading");
+    } else {
+      refreshButton.classList.remove("is-loading");
+    }
   }
 
   function renderMetrics(metrics) {
@@ -327,8 +346,18 @@
   }
 
   function loadStatus() {
+    if (isStatusLoading) {
+      return;
+    }
+
+    isStatusLoading = true;
+    setRefreshLoading(true);
+
     var source = getQuerySource();
     requestJson(source, function (error, data) {
+      isStatusLoading = false;
+      setRefreshLoading(false);
+
       if (error) {
         render(currentData || fallbackStatus, "warn", "샘플");
         return;

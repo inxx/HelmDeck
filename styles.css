@@ -210,8 +210,13 @@ h3 {
   cursor: pointer;
 }
 
-.icon-button:active {
+.icon-button:active:not(:disabled) {
   transform: translateY(1px);
+}
+
+.icon-button:disabled {
+  cursor: default;
+  color: var(--watch);
 }
 
 .icon-button svg {
@@ -222,6 +227,16 @@ h3 {
   stroke-width: 2.2;
   stroke-linecap: round;
   stroke-linejoin: round;
+}
+
+.icon-button.is-loading svg {
+  animation: refresh-spin 760ms linear infinite;
+}
+
+@keyframes refresh-spin {
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 .dashboard-grid {
